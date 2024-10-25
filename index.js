@@ -1,13 +1,4 @@
-const { nextISSTimesForMyLocation } = require('./iss');
-
-const printFlyOverTimes = function(flyTimes) {
-  for (const fly of flyTimes) {
-    const datetime = new Date(0);
-    datetime.setUTCSeconds(fly.risetime);
-    const duration = fly.duration;
-    console.log(`Next pass at ${datetime} for ${duration} seconds!`);
-  }
-};
+const { nextISSTimesForMyLocation, printFlyOverTimes } = require('./iss');
 
 nextISSTimesForMyLocation((error, passTimes) => {
   if (error) {
