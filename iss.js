@@ -22,4 +22,22 @@ const fetchMyIP = function(callback) {
   });
 };
 
-module.exports = fetchMyIP;
+const fetchCoordsByIP = function(ip, callback) {
+  needle.get(`http://ipwho.is/${ip}`, (error, resp, body) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+
+    if (!body.success) {
+      const msg = `Success status was ${body.success}. Server message says: ${body.message} when fetching for IP ${body.ip}`;
+      callback(Error(msg), null);
+      return;
+    }
+
+    callback(null, body);
+
+  });
+};
+
+module.exports = {fetchMyIP, fetchCoordsByIP};
